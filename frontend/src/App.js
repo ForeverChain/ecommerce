@@ -1,5 +1,10 @@
 import Home from "./pages/Home";
+import CreateShop from "./pages/CreateShop";
+import ListShop from "./components/ListShop";
+import CreateProduct from "./pages/CreateProduct";
+import ListProduct from "./components/ListProduct";
 import ProductsPage from "./pages/ProductsPage";
+import ProductsPerson from "./pages/ProductsPerson";
 import ProductDetailPage from "./pages/ProductDetailPage";
 import About from "./pages/About";
 import Login from "./pages/Login";
@@ -21,7 +26,12 @@ function App() {
             <Router>
                 <Switch>
                     <Route path="/" component={Home} exact />
+                    <Route path="/createShop" component={CreateShop} />
+                    <Route path="/listShop" component={ListShop} />
+                    <Route path="/createProduct" component={CreateProduct} />
+                    <Route path="/listProduct" component={ListProduct} />
                     <Route path="/products" component={ProductsPage} />
+                    <Route path="/productsPerson" component={ProductsPerson} />
                     <Route path="/shop" component={ShopPage} />
                     <Route path="/product/:id" component={ProductDetailPage} />
                     <Route path="/about" component={About} />

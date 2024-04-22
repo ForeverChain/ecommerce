@@ -1,45 +1,15 @@
 const express = require("express");
 const router = express.Router();
-const Product = require("../models/Product");
+const Shop = require("../models/Shop");
 const { verifyTokenAndAdmin } = require("./verifyToken");
 
 //Create Product
-router.post("/", verifyTokenAndAdmin, async (req, res) => {
-    const newProduct = new Product(req.body);
 
-    try {
-        const savedProduct = await newProduct.save();
-        res.status(200).json({ status: 1, message: "Бараа амжилттай нэмэгдлээ", data: [savedProduct] });
-    } catch (err) {
-        res.status(500).json({ status: 0, message: err.message });
-    }
-});
-
-// Update Product
-router.put("/:id", verifyTokenAndAdmin, async (req, res) => {
-    try {
-        const updatedProduct = await Product.findByIdAndUpdate(
-            req.params.id,
-            {
-                $set: req.body,
-            },
-            { new: true }
-        );
-
-        if (updatedProduct == null) {
-            res.status(200).json({ success: 0, message: "No Data Found!" });
-        } else {
-            res.status(200).json({ success: 1, message: "Бараа амжилттай шинчлэгдлээ", data: [updatedProduct] });
-        }
-    } catch (err) {
-        res.status(500).json({ status: 0, message: err.message });
-    }
-});
-
+// Get shops by seller ID
 router.get("/seller/:sellerId", async (req, res) => {
     try {
         const sellerId = req.params.sellerId;
-        const shopsBySeller = await Product.find({ seller: sellerId });
+        const shopsBySeller = await Shop.find({ seller: sellerId });
 
         if (shopsBySeller.length > 0) {
             res.status(200).json({ success: 1, message: "", data: shopsBySeller });
@@ -51,25 +21,42 @@ router.get("/seller/:sellerId", async (req, res) => {
     }
 });
 
+// Update Product
+router.put("/:id", verifyTokenAndAdmin, async (req, res) => {
+    try {
+        const updatedProduct = await Shop.findByIdAndUpdate(
+            req.params.id,
+            {
+                $set: req.body,
+            },
+            { new: true }
+        );
+
+        if (updatedProduct == null) {
+            res.status(200).json({ success: 0, message: "No Data Found!" });
+        } else {
+            res.status(200).json({ success: 1, message: "Дэлгүүр амжилттай шинчлэгдлээ", data: [updatedProduct] });
+        }
+    } catch (err) {
+        res.status(500).json({ status: 0, message: err.message });
+    }
+});
+
 //Get All Products
 router.get("/", async (req, res) => {
     try {
-        const itemPerPage = parseInt(req.query.limit || "10"); // Products per page
-        const pageNum = parseInt(req.query.page || "0"); // Products page number
-        const sortByVal = req.query.sortBy || "_id"; // Products sort by
-        const searchText = req.query.searchText || ""; // Products search text
-        const priceFilter = req.query.price || ""; // Products price filter
-        const sellerId = req.query.sellerId || ""; // Seller ID filter
+        const itemPerPage = parseInt(req.query.limit || "10"); //Products per page
+        const pageNum = parseInt(req.query.page || "0"); //Products page number
+        const sortByVal = req.query.sortBy || "_id"; //Products sort by
+        const searchText = req.query.searchText || ""; //Products search text
+        const priceFilter = req.query.price || ""; //Products search text
 
         let sortObject = {};
         let filterObj = {};
         let searchTextObj = {};
         let priceObject = {};
-        let sellerIdObj = {};
-
-        let sortByField = sortByVal;
-
-        if (sortByVal === "name") {
+        sortByField = sortByVal;
+        if (sortByVal == "name") {
             sortByField = "title";
         }
 
@@ -83,18 +70,14 @@ router.get("/", async (req, res) => {
             priceObject = { price: { $lte: priceFilter } };
         }
 
-        if (sellerId !== "") {
-            sellerIdObj = { seller: sellerId };
-        }
-
         filterObj = {
             $and: [searchTextObj, priceObject],
         };
 
         sortObject[sortByField] = 1;
 
-        const totalProducts = await Product.countDocuments(filterObj);
-        const productData = await Product.find(filterObj)
+        const totalProducts = await Shop.countDocuments(filterObj);
+        const productData = await Shop.find(filterObj)
             .sort(sortObject)
             .limit(itemPerPage)
             .skip(itemPerPage * pageNum);
@@ -114,8 +97,8 @@ router.get("/", async (req, res) => {
 //Get All Products
 router.get("/all", async (req, res) => {
     try {
-        const totalProducts = await Product.countDocuments({});
-        const productData = await Product.find({}).sort({ _id: 1 });
+        const totalProducts = await Shop.countDocuments({});
+        const productData = await Shop.find({}).sort({ _id: 1 });
 
         if (productData) {
             res.status(200).json({ success: 1, message: "", data: productData });
@@ -130,7 +113,7 @@ router.get("/all", async (req, res) => {
 //Get Single Product
 router.get("/find/:id", async (req, res) => {
     try {
-        const productData = await Product.findById(req.params.id);
+        const productData = await Shop.findById(req.params.id);
 
         if (productData) {
             res.status(200).json({ success: 1, message: "", data: productData });
@@ -145,7 +128,7 @@ router.get("/find/:id", async (req, res) => {
 // Delete Product
 router.delete("/:id", verifyTokenAndAdmin, async (req, res) => {
     try {
-        const deletedProduct = await Product.findByIdAndDelete(req.params.id);
+        const deletedProduct = await Shop.findByIdAndDelete(req.params.id);
 
         if (deletedProduct == null) {
             res.status(200).json({ success: 0, message: "No Data Found!" });

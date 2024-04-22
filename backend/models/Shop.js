@@ -9,6 +9,8 @@ const ShopSchema = new mongoose.Schema(
         facebook: { type: String },
         instagram: { type: String },
         mail: { type: String },
+        product: { type: mongoose.Schema.Types.ObjectId, ref: "Product" },
+        seller: { type: mongoose.Schema.Types.ObjectID, ref: "User", required: true },
     },
     { timestamps: true }
 );

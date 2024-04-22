@@ -80,8 +80,17 @@ const NavBar = () => {
                                             {userName}
                                         </button>
                                         <div className="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                            <Link className="dropdown-item" to="#">
-                                                Хэрэглэгчийн хэсэг
+                                            <Link to="createShop" className="dropdown-item">
+                                                Дэлгүүр нээх
+                                            </Link>
+                                            <Link to="listShop" className="dropdown-item">
+                                                Дэлгүүрийн жагсаалт
+                                            </Link>
+                                            <Link to="createProduct" className="dropdown-item">
+                                                Бараа нэмэх
+                                            </Link>
+                                            <Link to="listProduct" className="dropdown-item">
+                                                Барааны жагсаалт
                                             </Link>
                                             <Link className="dropdown-item" onClick={logoutHandler} to="#">
                                                 Гарах
