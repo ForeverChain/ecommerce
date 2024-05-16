@@ -4,9 +4,8 @@ const Product = require("../models/Product");
 const { verifyTokenAndAdmin } = require("./verifyToken");
 
 //Create Product
-router.post("/", verifyTokenAndAdmin, async (req, res) => {
+router.post("/", async (req, res) => {
     const newProduct = new Product(req.body);
-
     try {
         const savedProduct = await newProduct.save();
         res.status(200).json({ status: 1, message: "Бараа амжилттай нэмэгдлээ", data: [savedProduct] });
@@ -16,7 +15,7 @@ router.post("/", verifyTokenAndAdmin, async (req, res) => {
 });
 
 // Update Product
-router.put("/:id", verifyTokenAndAdmin, async (req, res) => {
+router.put("/:id", async (req, res) => {
     try {
         const updatedProduct = await Product.findByIdAndUpdate(
             req.params.id,
@@ -104,7 +103,7 @@ router.get("/", async (req, res) => {
         if (productData) {
             res.status(200).json({ success: 1, message: "", numOfPages, data: productData });
         } else {
-            res.status(200).json({ success: 0, message: "No Data Found!" });
+            res.status(200).json({ success: 0, message: "No Data Found!", data: [] });
         }
     } catch (err) {
         res.status(500).json({ status: 0, message: err.message });
@@ -143,7 +142,7 @@ router.get("/find/:id", async (req, res) => {
 });
 
 // Delete Product
-router.delete("/:id", verifyTokenAndAdmin, async (req, res) => {
+router.delete("/:id", async (req, res) => {
     try {
         const deletedProduct = await Product.findByIdAndDelete(req.params.id);
 

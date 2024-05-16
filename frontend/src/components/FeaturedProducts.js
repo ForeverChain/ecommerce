@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-import { getProducts } from "../redux/actions/productActions";
+import { getProducts, resetProducts } from "../redux/actions/productActions";
 import Product from "./Product";
 import Loading from "../components/Loading";
 
@@ -15,6 +15,7 @@ const FeaturedProducts = () => {
     const dispatch = useDispatch();
 
     useEffect(() => {
+        dispatch(resetProducts());
         dispatch(getProducts(0, 6, "", "", ""));
     }, []);
 
@@ -29,8 +30,7 @@ const FeaturedProducts = () => {
                 {Object.keys(products).length === 0 ? <Loading /> : <div className="section-center featured-center">{renderList}</div>}
 
                 <Link to="/products" className="btn">
-                    {" "}
-                    Бүх бүтээгдэхүүн{" "}
+                    Бүх бүтээгдэхүүн
                 </Link>
             </section>
         </>

@@ -17,6 +17,7 @@ const PaymentForm = () => {
     const [btnDisable, setBtnDisable] = useState(false);
     const [paymentMethod, setPaymentMethod] = useState("Cash on Delivery");
     const [showCardPayment, setShowCardPayment] = useState(false);
+    const [cardSection, setCardSection] = useState(false);
     const userInfo = useSelector((state) => state.userPanelLogin.userInfo.data);
     const user = userInfo[0]._id;
 
@@ -125,12 +126,19 @@ const PaymentForm = () => {
         }
     };
 
+    const showButton = () => {
+        setCardSection(false);
+        setTimeout(() => {
+            setCardSection(true);
+        }, 500);
+    };
+
     useEffect(() => {
         dispatch(showCart(false));
 
         if (showCardPayment) {
             return function cleanupListener() {
-                cardElement.removeEventListener("change", handleCardError);
+                cardElement?.removeEventListener("change", handleCardError);
             };
         }
     }, [showCardPayment]);
@@ -150,12 +158,39 @@ const PaymentForm = () => {
                                     <div className="input-group mt-3">
                                         <select className="form-control form-control-lg" id="paymentType" onChange={changePaymentMethod}>
                                             <option value="cod">Гараас төлөх</option>
-                                            <option value="card">Кардаар төлөх</option>
+                                            <option value="card">Картаар төлөх</option>
                                         </select>
                                     </div>
                                     {showCardPayment ? (
-                                        <div className="input-group mt-3">
-                                            <div className="card-number"></div>
+                                        <div className="mt-3">
+                                            <div>Төлбөр төлөх банкаа сонгон уу</div>
+                                            <div style={{ display: "flex", justifyContent: "center", gap: 8 }}>
+                                                <div onClick={() => showButton()}>
+                                                    <img src="https://play-lh.googleusercontent.com/Aw4bwCDJgAzu6AFAbbcfCFpheVMB6ZKiEM3JlrJ3cAM65fK-1QaTZZs_Vk4UFBzykQ" alt="Card" className="card-image" style={{ height: "40px", width: "auto", borderRadius: "8px" }} />
+                                                </div>
+                                                <div onClick={() => showButton()}>
+                                                    <img src="https://play-lh.googleusercontent.com/9tUBesUsI4UIkpgO1MPIMLFvhDa_4vZE75TrVAUHFA7a0bJ7IIgeyh2r1QXs9VlmXmkX" alt="Card" className="card-image" style={{ height: "40px", width: "auto", borderRadius: "8px" }} />
+                                                </div>
+                                                <div onClick={() => showButton()}>
+                                                    <img src="https://play-lh.googleusercontent.com/vHTV4z9QgeW9tPT2uIQtFIFA1Y_i2se3mrc98h4XvUJFhvQGgLRlCdl4oHF3YZXI4qcG" alt="Card" className="card-image" style={{ height: "40px", width: "auto", borderRadius: "8px" }} />
+                                                </div>
+                                                <div onClick={() => showButton()}>
+                                                    <img src="https://play-lh.googleusercontent.com/oLKxnYGEgAyoxZ4rG6ogqzoLQMIUC7wrAuE7tca9PKWZubIev1t3CvvnJvpvj7KhKL4" alt="Card" className="card-image" style={{ height: "40px", width: "auto", borderRadius: "8px" }} />
+                                                </div>
+                                            </div>
+                                            {cardSection && (
+                                                <>
+                                                    <div className="mt-3">
+                                                        <input type="text" className="form-control" placeholder="Картны дугаар" />
+                                                    </div>
+                                                    <div className="mt-3">
+                                                        <input type="text" className="form-control" placeholder="Дуусах өдөр" />
+                                                    </div>
+                                                    <div className="mt-3">
+                                                        <input type="text" className="form-control" placeholder="CVV" />
+                                                    </div>
+                                                </>
+                                            )}
                                         </div>
                                     ) : (
                                         ""

@@ -29,20 +29,22 @@ export const updateShop = (shopId, shopData) => async (dispatch) => {
     }
 };
 
-export const getShops = (pageNum, productsPerPage, sortBy, searchText) => async (dispatch) => {
-    try {
-        const response = await axios.get(`shops?page=${pageNum}&limit=${productsPerPage}&sortBy=${sortBy}&searchText=${searchText}`);
-        const responseData = response.data;
+export const getShops =
+    (pageNum, productsPerPage, sortBy, searchText = "") =>
+    async (dispatch) => {
+        try {
+            const response = await axios.get(`shops?page=${pageNum}&limit=${productsPerPage}&sortBy=${sortBy}&searchText=${searchText}`);
+            const responseData = response.data;
 
-        responseData["sortBy"] = sortBy;
-        responseData["searchText"] = searchText;
-        dispatch({ type: FETCH_SHOPS, payload: responseData });
-    } catch (error) {
-        const message = error.response && error.response.data.message ? error.response.data.message : error.message;
+            responseData["sortBy"] = sortBy;
+            responseData["searchText"] = searchText;
+            dispatch({ type: FETCH_SHOPS, payload: responseData });
+        } catch (error) {
+            const message = error.response && error.response.data.message ? error.response.data.message : error.message;
 
-        toast.error(message, ToastObjects);
-    }
-};
+            toast.error(message, ToastObjects);
+        }
+    };
 
 export const getShopsBySeller = (id) => async (dispatch) => {
     try {

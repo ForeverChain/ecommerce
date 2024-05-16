@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import logo from "../images/logo.svg";
+import logo from "../images/logo.jpg";
 import { showCart } from "../redux/actions/cartActions";
 import { logout } from "../redux/actions/userActions";
 
@@ -63,7 +63,7 @@ const NavBar = () => {
                     </div>
                     <div>
                         <Link to="/">
-                            <img src="https://zary.mn/27a395c08037dc4652ee51434e509bb1.png" style={{ maxHeight: "48px", width: "auto" }} className="nav-logo" alt="logo" />
+                            <img src={logo} style={{ maxHeight: "48px", width: "auto" }} className="nav-logo" alt="logo" />
                         </Link>
                     </div>
                     <div className="auth-section">

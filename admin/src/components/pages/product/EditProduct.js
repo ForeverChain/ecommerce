@@ -71,7 +71,7 @@ const EditProduct = ({ match }) => {
                                 <div className="col-12 grid-margin">
                                     <div className="card">
                                         <div className="card-body">
-                                            <h4 className="card-title">Edit Product</h4>
+                                            <h4 className="card-title">Барааг шинэчлэх</h4>
                                             <form className="form-sample" onSubmit={handleSubmit}>
                                                 <p className="card-description"></p>
                                                 <div className="row">
@@ -99,7 +99,7 @@ const EditProduct = ({ match }) => {
                                                 <div className="row">
                                                     <div className="col-md-6">
                                                         <div className="form-group row">
-                                                            <label className="col-sm-3 col-form-label">Image URL</label>
+                                                            <label className="col-sm-3 col-form-label">Зурагны URL</label>
                                                             <div className="col-sm-9">
                                                                 <input type="text" className={"form-control form-control-lg" + (submitted && !formState.values.image ? " is-invalid" : "")} name="image" onChange={handleChange} value={formState.values.image || ""} />
                                                                 {submitted && !formState.values.image && <div className="inline-errormsg">Image is required</div>}
@@ -110,7 +110,7 @@ const EditProduct = ({ match }) => {
                                                 <div className="row">
                                                     <div className="col-md-6">
                                                         <div className="form-group row">
-                                                            <label className="col-sm-3 col-form-label">Size</label>
+                                                            <label className="col-sm-3 col-form-label">Хэмжээ</label>
                                                             <div className="col-sm-9">
                                                                 <input type="text" className="form-control form-control-lg" name="size" onChange={handleChange} value={formState.values.size || ""} />
                                                             </div>
@@ -120,7 +120,7 @@ const EditProduct = ({ match }) => {
                                                 <div className="row">
                                                     <div className="col-md-6">
                                                         <div className="form-group row">
-                                                            <label className="col-sm-3 col-form-label">Color</label>
+                                                            <label className="col-sm-3 col-form-label">Өнгө</label>
                                                             <div className="col-sm-9">
                                                                 <input type="text" className="form-control form-control-lg" name="color" onChange={handleChange} value={formState.values.color || ""} />
                                                             </div>
@@ -130,7 +130,7 @@ const EditProduct = ({ match }) => {
                                                 <div className="row">
                                                     <div className="col-md-6">
                                                         <div className="form-group row">
-                                                            <label className="col-sm-3 col-form-label">Price</label>
+                                                            <label className="col-sm-3 col-form-label">Үнэ</label>
                                                             <div className="col-sm-9">
                                                                 <input type="number" className="form-control form-control-lg" name="price" onChange={handleChange} value={formState.values.price || ""} />
                                                             </div>
@@ -141,11 +141,11 @@ const EditProduct = ({ match }) => {
                                                 <div className="row">
                                                     <div className="col-md-6">
                                                         <div className="form-group row">
-                                                            <label className="col-sm-3 col-form-label">Category</label>
+                                                            <label className="col-sm-3 col-form-label">Төрөл</label>
                                                             <div className="col-sm-9">
                                                                 <select className="form-control" name="category" multiple>
-                                                                    <option value="man">Man</option>
-                                                                    <option value="woman">Woman</option>
+                                                                    <option value="man">Эрэгтэй</option>
+                                                                    <option value="woman">Эмэгтэй</option>
                                                                 </select>
                                                             </div>
                                                         </div>
@@ -154,7 +154,7 @@ const EditProduct = ({ match }) => {
                                                 <div className="row">
                                                     <div className="col-md-6">
                                                         <div className="form-group row">
-                                                            <label className="col-sm-3 col-form-label">Stock</label>
+                                                            <label className="col-sm-3 col-form-label">Тоо хэмжээ</label>
                                                             <div className="col-sm-9">
                                                                 <input type="text" className={"form-control form-control-lg" + (submitted && !formState.values.stock ? " is-invalid" : "")} name="stock" onChange={handleChange} value={formState.values.stock || ""} />
                                                                 {submitted && !formState.values.stock && <div className="inline-errormsg">Stock is required</div>}
@@ -164,10 +164,10 @@ const EditProduct = ({ match }) => {
                                                 </div>
                                                 <div className="text-center">
                                                     <button type="submit" className="btn btn-primary me-2">
-                                                        Update
+                                                        Шинэчлэх
                                                     </button>
                                                     <Link to="/products">
-                                                        <button className="btn btn-light">Cancel</button>
+                                                        <button className="btn btn-light">Болих</button>
                                                     </Link>
                                                 </div>
                                             </form>

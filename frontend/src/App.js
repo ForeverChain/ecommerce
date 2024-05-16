@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import Home from "./pages/Home";
 import CreateShop from "./pages/CreateShop";
 import ListShop from "./components/ListShop";
@@ -18,8 +19,23 @@ import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Toast from "./components/Toast";
 import "react-toastify/dist/ReactToastify.css";
 import ShopPage from "./pages/Shop";
+import axios from "axios";
+import { useSelector } from "react-redux";
+
+axios.defaults.baseURL = process.env.REACT_APP_API_BASEURL;
+axios.defaults.headers.post["Content-Type"] = "application/json";
 
 function App() {
+    const userInfo = useSelector((state) => state.userPanelLogin);
+
+    useEffect(() => {
+        if (userInfo) {
+            const { token } = userInfo;
+            if (token) {
+                axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+            }
+        }
+    }, [userInfo]);
     return (
         <>
             <Toast />

@@ -1,4 +1,4 @@
-const Header = () => {
+const Footer = () => {
     return (
         <footer className="footer">
             <div className="d-sm-flex justify-content-center">
@@ -8,4 +8,4 @@ const Header = () => {
     );
 };
 
-export default Header;
+export default Footer;

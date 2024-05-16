@@ -21,6 +21,17 @@ router.get("/seller/:sellerId", async (req, res) => {
     }
 });
 
+//Create Product
+router.post("/", verifyTokenAndAdmin, async (req, res) => {
+    const newProduct = new Shop(req.body);
+    try {
+        const savedProduct = await newProduct.save();
+        res.status(200).json({ status: 1, message: "Бараа амжилттай нэмэгдлээ", data: [savedProduct] });
+    } catch (err) {
+        res.status(500).json({ status: 0, message: err.message });
+    }
+});
+
 // Update Product
 router.put("/:id", verifyTokenAndAdmin, async (req, res) => {
     try {
@@ -62,7 +73,7 @@ router.get("/", async (req, res) => {
 
         if (searchText !== "") {
             searchTextObj = {
-                $or: [{ title: { $regex: searchText, $options: "i" } }, { description: { $regex: searchText, $options: "i" } }],
+                $or: [{ name: { $regex: searchText, $options: "i" } }, { description: { $regex: searchText, $options: "i" } }],
             };
         }
 

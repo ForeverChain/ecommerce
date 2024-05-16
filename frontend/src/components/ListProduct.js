@@ -4,7 +4,7 @@ import NavBar from "./Navbar";
 import PageHeading from "./PageHeading";
 import Sidebar from "./Sidebar";
 import Cart from "./Cart";
-import { updateProduct, productBySeller, setProductDetail, getProductsBySeller } from "../redux/actions/productActions";
+import { updateProduct, productBySeller, setProductDetail, getProductsBySeller, resetProducts } from "../redux/actions/productActions";
 import { useTable } from "react-table";
 import Modal from "./Modal"; // Import your modal component
 import { FaEdit } from "react-icons/fa";
@@ -80,7 +80,7 @@ const ListShop = () => {
     const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow } = tableInstance;
 
     useEffect(() => {
-        dispatch(resetShops());
+        dispatch(resetProducts());
         dispatch(getProductsBySeller(sellerId));
     }, [dispatch, sellerId]);
 

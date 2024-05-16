@@ -46,6 +46,8 @@ router.post("/login", async (req, res) => {
                     { expiresIn: "3d" }
                 );
 
+                console.log(accessToken);
+
                 const { password, ...others } = user._doc;
                 res.status(200).json({ success: 1, message: "", data: [{ ...others }], token: accessToken });
             }

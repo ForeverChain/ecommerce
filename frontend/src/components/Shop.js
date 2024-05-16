@@ -8,14 +8,31 @@ const Shop = (props) => {
     const { name, image, price, createdAt } = props.detail;
     const dispatch = useDispatch();
 
-    console.log(image);
+    function isValidURL(url) {
+        // Regular expression to check if the string is a valid URL
+        const urlRegex = /^(ftp|http|https):\/\/[^ "]+$/;
+
+        // Test the URL against the regular expression
+        return urlRegex.test(url);
+    }
+
+    // Example usage
+    function isValidURL(url) {
+        // Regular expression to check if the string is a valid URL
+        const urlRegex = /^(ftp|http|https):\/\/[^ "]+$/;
+
+        // Test the URL against the regular expression
+        return urlRegex.test(url);
+    }
     return (
         <>
             <div class="max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
-                <a href="#">
-                    <img class="rounded-t-lg" src={image} alt="" />
-                </a>
-                <div class="p-5">
+                <div class="flex justify-center mt-4">
+                    <a href="#" class="">
+                        <img class="rounded-t-lg w-full mx-auto" src={image && isValidURL(image) ? image : "https://t3.ftcdn.net/jpg/04/60/01/36/360_F_460013622_6xF8uN6ubMvLx0tAJECBHfKPoNOR5cRa.jpg"} alt="" style={{ width: "auto", height: "200px" }} />
+                    </a>
+                </div>
+                <div class="p-4">
                     <a href="#">
                         <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">{name}</h5>
                     </a>

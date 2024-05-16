@@ -12,11 +12,11 @@ const Filters = (props) => {
                         <input type="text" className="search-input" placeholder="Хайх..." onChange={changeSearch} />
                     </form>
                     {/* price */}
-                    <h5>Үнэ</h5>
+                    {/* <h5>Үнэ</h5>
                     <form className="price-form">
                         <input type="range" className="price-filter w-100" min={0} defaultValue={priceFilter} max={10000} onChange={changePrice} />
                     </form>
-                    <span className="price-value">Үнэ : {priceFilter}₮</span>
+                    <span className="price-value">Үнэ : {priceFilter}₮</span> */}
                 </div>
             </div>
         </>
