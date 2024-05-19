@@ -16,13 +16,13 @@ dotenv.config();
 
 //MongoDB Connection
 mongoose
-    .connect(process.env.DB_URL_DEVELOPMENT)
-    .then(() => {
-        console.log("DB Connection Successfully");
-    })
-    .catch((err) => {
-        console.log(err);
-    });
+  .connect(process.env.DB_URL_DEVELOPMENT)
+  .then(() => {
+    console.log("DB Connection Successfully");
+  })
+  .catch((err) => {
+    console.log(err);
+  });
 
 //Allow to call from different source
 app.use(cors());
@@ -42,5 +42,5 @@ app.use("/api/checkout", golomtRoute);
 const API_PORT = process.env.API_PORT || 5002;
 
 app.listen(API_PORT, () => {
-    console.log(`Backend Server is running on port ${API_PORT}`);
+  console.log(`Backend Server is running on port ${API_PORT}`);
 });
